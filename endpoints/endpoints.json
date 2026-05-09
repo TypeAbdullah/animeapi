@@ -1,0 +1,189 @@
+{
+  "generatedAt": "2026-04-07",
+  "service": "TatakaiCore",
+  "base": {
+    "compat": "/api",
+    "proxy": "/api/proxy",
+    "v2": "/api/v2"
+  },
+  "system": [
+    { "method": "GET", "path": "/health" },
+    { "method": "GET", "path": "/v" }
+  ],
+  "compatibility": [
+    {
+      "method": "GET",
+      "path": "/api/servers/:id",
+      "description": "HiAnime-compatible server list for episode id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/stream",
+      "query": ["id", "server", "type"],
+      "description": "HiAnime-compatible stream response"
+    },
+    {
+      "method": "GET",
+      "path": "/api/stream/fallback",
+      "query": ["id", "server", "type"],
+      "description": "Fallback extraction path"
+    }
+  ],
+  "proxy": [
+    {
+      "method": "GET",
+      "path": "/api/proxy/status",
+      "description": "Live proxy balancer node health/status"
+    },
+    {
+      "method": "GET",
+      "path": "/api/proxy/m3u8-streaming-proxy",
+      "query": ["url", "referer"],
+      "description": "M3U8 and segment proxy with nested playlist rewrite"
+    }
+  ],
+  "v2": {
+    "hianime": [
+      { "method": "GET", "path": "/api/v2/hianime/" },
+      { "method": "GET", "path": "/api/v2/hianime/home" },
+      { "method": "GET", "path": "/api/v2/hianime/azlist/:sortOption" },
+      { "method": "GET", "path": "/api/v2/hianime/qtip/:animeId" },
+      { "method": "GET", "path": "/api/v2/hianime/category/:name" },
+      { "method": "GET", "path": "/api/v2/hianime/genre/:name" },
+      { "method": "GET", "path": "/api/v2/hianime/producer/:name" },
+      { "method": "GET", "path": "/api/v2/hianime/schedule" },
+      { "method": "GET", "path": "/api/v2/hianime/search" },
+      { "method": "GET", "path": "/api/v2/hianime/search/suggestion" },
+      { "method": "GET", "path": "/api/v2/hianime/anime/:animeId" },
+      { "method": "GET", "path": "/api/v2/hianime/anime/:animeId/episodes" },
+      { "method": "GET", "path": "/api/v2/hianime/anime/:animeId/next-episode-schedule" },
+      {
+        "method": "GET",
+        "path": "/api/v2/hianime/episode/servers",
+        "query": ["animeEpisodeId"]
+      },
+      {
+        "method": "GET",
+        "path": "/api/v2/hianime/episode/sources",
+        "query": ["animeEpisodeId", "server", "category"]
+      },
+      {
+        "method": "GET",
+        "path": "/api/v2/hianime/episode/stream",
+        "query": ["animeEpisodeId", "server", "category"],
+        "description": "Unified stream envelope with streamingLink/tracks/intro/outro/servers"
+      }
+    ],
+    "other": [
+      { "method": "GET", "path": "/api/v2/anicrush" },
+      { "method": "GET", "path": "/api/v2/media/search", "query": ["q", "mode", "page", "limit"] },
+      { "method": "GET", "path": "/api/v2/manga" },
+      { "method": "GET", "path": "/api/v2/manga/search", "query": ["q", "page", "limit"] },
+      { "method": "GET", "path": "/api/v2/manga/filters/schema" },
+      { "method": "GET", "path": "/api/v2/manga/filters/counts", "query": ["q"] },
+      { "method": "GET", "path": "/api/v2/manga/providers" },
+      { "method": "GET", "path": "/api/v2/manga/:id" },
+      { "method": "GET", "path": "/api/v2/manga/mapper/:provider/chapters/:anilistId" },
+      { "method": "GET", "path": "/api/v2/manga/mapper/:provider/pages", "query": ["chapterId"] },
+      { "method": "GET", "path": "/api/v2/manga/mapper/:provider/pages/:chapterId" },
+      { "method": "GET", "path": "/api/v2/manga/:id/chapters", "query": ["provider", "providers", "language"] },
+      { "method": "GET", "path": "/api/v2/manga/:id/read", "query": ["chapterKey", "provider", "chapterId", "chapterNumber"] },
+      { "method": "GET", "path": "/api/v2/manga/:id/read/:chapterKey" },
+      { "method": "ALL", "path": "/api/v2/manga/mangaball" },
+      { "method": "ALL", "path": "/api/v2/manga/mangaball/*" },
+      { "method": "ALL", "path": "/api/v2/manga/allmanga" },
+      { "method": "ALL", "path": "/api/v2/manga/allmanga/*" },
+      { "method": "ALL", "path": "/api/v2/manga/atsu" },
+      { "method": "ALL", "path": "/api/v2/manga/atsu/*" },
+      { "method": "ALL", "path": "/api/v2/manga/mangafire" },
+      { "method": "ALL", "path": "/api/v2/manga/mangafire/*" },
+      { "method": "ALL", "path": "/api/v2/manga/adult/:provider" },
+      { "method": "ALL", "path": "/api/v2/manga/adult/:provider/*" }
+    ]
+  },
+  "providers": {
+    "mount": "/api/v2/anime",
+    "catalog": [
+      { "method": "GET", "path": "/api/v2/anime" },
+
+      { "method": "GET", "path": "/api/v2/anime/animepahe/search/:query" },
+      { "method": "GET", "path": "/api/v2/anime/animepahe/latest" },
+      { "method": "GET", "path": "/api/v2/anime/animepahe/info/:id" },
+      { "method": "GET", "path": "/api/v2/anime/animepahe/episodes/:id" },
+      { "method": "GET", "path": "/api/v2/anime/animepahe/episode/:id/:session" },
+
+      { "method": "GET", "path": "/api/v2/anime/animekai/search/:query", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/spotlight" },
+      { "method": "GET", "path": "/api/v2/anime/animekai/schedule/:date" },
+      { "method": "GET", "path": "/api/v2/anime/animekai/suggestions/:query" },
+      { "method": "GET", "path": "/api/v2/anime/animekai/recent-episodes", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/recent-added", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/completed", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/new-releases", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/movies", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/tv", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/ova", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/ona", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/specials", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/genres" },
+      { "method": "GET", "path": "/api/v2/anime/animekai/genre/:genre", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/info/:id" },
+      { "method": "GET", "path": "/api/v2/anime/animekai/watch/:episodeId", "query": ["dub"] },
+      { "method": "GET", "path": "/api/v2/anime/animekai/servers/:episodeId", "query": ["dub"] },
+
+      { "method": "GET", "path": "/api/v2/anime/animelok/home" },
+      { "method": "GET", "path": "/api/v2/anime/animelok/search", "query": ["q"] },
+      { "method": "GET", "path": "/api/v2/anime/animelok/schedule" },
+      { "method": "GET", "path": "/api/v2/anime/animelok/regional-schedule" },
+      { "method": "GET", "path": "/api/v2/anime/animelok/languages", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animelok/languages/:language", "query": ["page"] },
+      { "method": "GET", "path": "/api/v2/anime/animelok/anime/:id" },
+      { "method": "GET", "path": "/api/v2/anime/animelok/watch/:id", "query": ["ep"] },
+
+      { "method": "GET", "path": "/api/v2/anime/animeya/home" },
+      { "method": "GET", "path": "/api/v2/anime/animeya/search", "query": ["q"] },
+      { "method": "GET", "path": "/api/v2/anime/animeya/info/:slug" },
+      { "method": "GET", "path": "/api/v2/anime/animeya/watch/:episodeId", "query": ["file"] },
+      { "method": "GET", "path": "/api/v2/anime/animeya/watch/anilist_id=:id/episode=:ep" },
+
+      { "method": "GET", "path": "/api/v2/anime/watchaw/home" },
+      { "method": "GET", "path": "/api/v2/anime/watchaw/search", "query": ["q"] },
+      { "method": "GET", "path": "/api/v2/anime/watchaw/episode", "query": ["id", "episodeUrl", "anilist_id", "episode"] },
+
+      { "method": "GET", "path": "/api/v2/anime/aniworld/search/:q" },
+      { "method": "GET", "path": "/api/v2/anime/aniworld/info/*" },
+      { "method": "GET", "path": "/api/v2/anime/aniworld/watch/*" },
+
+      { "method": "GET", "path": "/api/v2/anime/desidub/home" },
+      { "method": "GET", "path": "/api/v2/anime/desidub/search", "query": ["q"] },
+      { "method": "GET", "path": "/api/v2/anime/desidub/info/:id" },
+      { "method": "GET", "path": "/api/v2/anime/desidub/watch/:id" },
+
+      { "method": "GET", "path": "/api/v2/anime/hindidubbed/home" },
+      { "method": "GET", "path": "/api/v2/anime/hindidubbed/category/:name" },
+      { "method": "GET", "path": "/api/v2/anime/hindidubbed/search/:title" },
+      { "method": "GET", "path": "/api/v2/anime/hindidubbed/anime/:slug" },
+      { "method": "GET", "path": "/api/v2/anime/hindidubbed/episode/hls", "query": ["url", "server"] },
+
+      { "method": "GET", "path": "/api/v2/anime/toonstream" },
+      { "method": "GET", "path": "/api/v2/anime/toonstream/home" },
+      { "method": "GET", "path": "/api/v2/anime/toonstream/search/:query/:page?" },
+      { "method": "GET", "path": "/api/v2/anime/toonstream/movies/:page?" },
+      { "method": "GET", "path": "/api/v2/anime/toonstream/movie/info/:slug" },
+      { "method": "GET", "path": "/api/v2/anime/toonstream/movie/sources/:slug/" },
+      { "method": "GET", "path": "/api/v2/anime/toonstream/series/:page?" },
+      { "method": "GET", "path": "/api/v2/anime/toonstream/series/info/:slug" },
+      { "method": "GET", "path": "/api/v2/anime/toonstream/episode/sources/:slug" },
+
+      { "method": "GET", "path": "/api/v2/anime/toonworld/search/:q" },
+      { "method": "GET", "path": "/api/v2/anime/toonworld/episode", "query": ["slug", "anime", "season", "episode"] },
+
+      { "method": "GET", "path": "/api/v2/anime/episode", "query": ["tmdbId", "malId", "anilistId", "season", "episode", "type"] },
+      { "method": "GET", "path": "/api/v2/anime/proxy", "query": ["url", "referer"] }
+    ]
+  },
+  "notes": [
+    "Frontend dev-only provider pass-through (/api/providers/*) is a Vite proxy rule, not a TatakaiCore runtime endpoint.",
+    "Some routes may return wrapped envelopes depending on caller context and compatibility mode."
+  ]
+}
